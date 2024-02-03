@@ -15,7 +15,7 @@ import numpy as np
 import sqlalchemy as sql
 
 #%% read csv
-df = pd.read_csv('pizza_delivery.csv')
+df = pd.read_csv('../data/pizza_delivery.csv')
 df.head()
 
 #%% number of rows
