@@ -7491,7 +7491,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [150]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [212]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -7504,8 +7504,11 @@ a.anchor-link {
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">'ignore'</span><span class="p">)</span>
 
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">OneHotEncoder</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.compose</span> <span class="kn">import</span> <span class="n">ColumnTransformer</span>
 <span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">mean_absolute_error</span><span class="p">,</span> <span class="n">make_scorer</span><span class="p">,</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span>
 </pre></div>
 </div>
@@ -7517,7 +7520,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [151]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [213]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># importing the tips dataset</span>
@@ -7535,7 +7538,7 @@ a.anchor-link {
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[151]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[213]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -7645,7 +7648,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [152]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [214]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">diamonds_df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
@@ -7688,12 +7691,12 @@ memory usage: 3.0 MB
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [153]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [215]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># make categorical and numerical columns</span>
 <span class="n">cat_cols</span> <span class="o">=</span> <span class="n">diamonds_df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">'object'</span><span class="p">,</span> <span class="s1">'category'</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-<span class="n">num_cols</span> <span class="o">=</span> <span class="n">diamonds_df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">"number"</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">num_cols</span> <span class="o">=</span> <span class="n">diamonds_df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">"number"</span><span class="p">])</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'price'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">cat_cols</span><span class="p">,</span> <span class="n">num_cols</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -7708,7 +7711,7 @@ memory usage: 3.0 MB
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>['cut', 'color', 'clarity']
-['carat', 'depth', 'table', 'price', 'x', 'y', 'z']
+['carat', 'depth', 'table', 'x', 'y', 'z']
 </pre>
 </div>
 </div>
@@ -7735,7 +7738,7 @@ memory usage: 3.0 MB
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [154]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [216]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">diamonds_df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
@@ -7749,7 +7752,7 @@ memory usage: 3.0 MB
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[154]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[216]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -7883,7 +7886,7 @@ memory usage: 3.0 MB
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [155]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [217]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">diamonds_df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
@@ -7897,7 +7900,7 @@ memory usage: 3.0 MB
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[155]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[217]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>carat      False
 cut        False
@@ -7932,7 +7935,7 @@ dtype: bool</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [156]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [218]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># check for duplicated rows</span>
@@ -7960,7 +7963,7 @@ dtype: bool</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [157]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [219]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># drop duplicates</span>
@@ -7986,7 +7989,7 @@ dtype: bool</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [158]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [220]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">dist_boxplot</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
@@ -8016,7 +8019,7 @@ dtype: bool</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [159]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [221]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">dist_boxplot</span><span class="p">(</span><span class="n">diamonds_df</span><span class="p">)</span>
@@ -8050,12 +8053,6 @@ dtype: bool</pre>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedImage jp-OutputArea-output" tabindex="0">
-<img alt="No description has been provided for this image" class="" src="data:image/png;base64,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h/C+N+jahGGe7gYAwEfw1GUAADqgublZQUFBbdqDgoLU3Nzc4e08/fTTuvXWWxUREaGIiAilpKToz3/+s7XcGKOsrCzFxsaqR48eSk1N1ZEjR1y2UV9fr4ULF6pPnz4KCwvTtGnTVFZW5lJTVVWl9PR06ynR6enpqq6u/nqDBgDARxF0AQDogLvuuksPP/ywPvvsM6vt008/1Y9//GONHz++w9vp16+fHn/8cb3//vt6//33ddddd+nee++1wuwTTzyhNWvWaP369SooKJDD4dDEiRN17tw5axuZmZnauXOnduzYoffee0/nz59XWlqampqarJqZM2eqqKhIubm5ys3NVVFRkdLT07vgOwEAgPfj0mUAADpg/fr1uvfee3X99dcrLi5ONptNp06d0pAhQ5STk9Ph7dxzzz0uX//yl7/U008/rX379unmm2/W2rVrtWLFCk2fPl2StG3bNsXExGj79u2aN2+enE6nNm/erOeee04TJkyQJOXk5CguLk67du3S5MmTdezYMeXm5mrfvn1KTk6WJG3atEkpKSkqKSnRoEGDuui70nF1dXUqKChwaSsuLlZzM39zBwB0PYIuAAAdEBcXp4MHDyovL08fffSRjDG6+eabrbDZGU1NTfrjH/+oL774QikpKSotLVVFRYXLPb8hISEaN26c8vPzNW/ePBUWFqqxsdGlJjY2VomJicrPz9fkyZO1d+9e2e12K+RK0qhRo2S325Wfn3/RoFtfX6/6+nrr65qamk6PrbWCggJlbnhJvfr96xVSZQffVa+BI7tsHwAAtODPqAAAXMJbb72lm2++2Qp9EydO1MKFC7Vo0SKNHDlSt9xyi959992vtc1Dhw7pG9/4hkJCQvTggw9q586duvnmm1VRUSFJiomJcamPiYmxllVUVCg4OFi9e/e+ZE10dHSb/UZHR1s17Vm9erV1T6/dbldcXNzXGtfl9Op3k65NGGZ9vhHdr0u3DwBAC4IuAACXsHbtWmVkZCgiIqLNMrvdrnnz5mnNmjVfa5uDBg1SUVGR9u3bpx/96EeaPXu2jh49ai232Wwu9caYNm2tta5pr/5y21m+fLmcTqf1OX36dEeHBACAVyHoAgBwCcXFxZoyZcpFl0+aNEmFhYVfa5vBwcG66aabNGLECK1evVpDhw7Vb37zGzkcDklqc9a1srLSOsvrcDjU0NCg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"/>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedImage jp-OutputArea-output" tabindex="0">
 <img alt="No description has been provided for this image" class="" src="data:image/png;base64,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sbGxkqQePXowEBUAqG7AqWeffbbJQadaGohKqps3UZLGjBmj7OxsPffcc8rIyJBU17O7YsUKnTp1StXV1Ro7dqycTqdKSkpUW1ur48eP67777lNGRoZKSkok1c3nunjxYj333HM6fPiwHn30Ua1YsUJHjhzRz372s+sOIFV/LEeOHNHLL7+sU6dO6Z///KdOnTqll19+udX7MYPNZnN5BAYGauzYsdq7d69WrFhhdnoAWlA/T2xOTo5ycnKMz0YAnsu06YX27NljTDF07tw5Y6oLScyjCwDXePjhhzVv3rybnmJo//792r9/vySpV69eev755yXVzaM7f/58I6579+765z//qcLCQi1fvtxY33Ae3ezsbGP9v//7vys0NPSGpgR6+OGHtXLlykavfaP7aW9vvvmm2SkAuEkN54lljligczCt0JXqit2LFy9qwYIFcjgcstlsSk5OpicXAJrw3e9+V5L0/PPPq6CgQGfOnFFFRYUcDofKy8vl6+uroKAgdenSRV26dNGDDz6oadOm6ZNPPlFWVpakuily7r33XqPH9MEHH9TJkyd16dIlBQYGatiwYaqpqdGuXbuUnZ0tPz8/RUdH65577tGpU6d06dIl9ezZU5JUUlJiPOdGe2AffvjhJl/bHXtyr5WZmanTp0/LYrFo8ODBbjc6NICmMU8s0LmYWuhKdZcxM4UQALTeoEGD9Nhjj7U6fvjw4Ro+fHiT27y8vBoVal5eXnryySf15JNPuqxv64Kuqdd2Z0VFRfrhD3+o/fv3q2fPnnI6nXI4HBo3bpxSU1P5khYAADdiyj26AAB0NAsXLlRpaanRs11cXKycnByVlpZq0aJFZqcHAAAaML1HFwCAjiAtLU379u3ToEGDjHWDBw/W66+/rujoaBMzAwAA16LQBQCgFWpra+Xj49NovY+Pj2pra03ICIA7qh/huaGBAwfK27vl/3ZXV1cbU7lJqtuH85akCHQKFLoAALTCI488oueee07/8R//obCwMEnSP/7xDz3//PMaP368ydkBcBcNR3iW1OpRnnNzczXv9T3qEdxHklSYe0IBEUPU81YnDHgoCl0AAFohOTlZjz32mO644w6Fh4fLYrHoyy+/1NChQ5WSkmJ2egDcyM2O8NwjuI/xvLKi822dFtCpUOgCANAK4eHh+tvf/qb09HTl5ubK6XRq8ODBmjBh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"/>
 </div>
 </div>
@@ -8078,7 +8075,7 @@ dtype: bool</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [160]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [222]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Outlier treatment</span>
@@ -8102,7 +8099,7 @@ dtype: bool</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [161]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [223]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">outliers</span> <span class="o">=</span> <span class="n">outlierIndexFinder</span><span class="p">(</span><span class="n">diamonds_df</span><span class="p">)</span>
@@ -8126,9 +8123,6 @@ Indices: [2, 8, 24, 35, 42, 43, 84, 91, 95, 97, 124, 129, 171, 190, 204, 219, 22
 
 Col: table
 Indices: [2, 91, 145, 219, 227, 239, 296, 314, 356, 359, 461, 504, 526, 712, 771, 777, 868, 919, 929, 932, 1140, 1196, 1227, 1275, 1319, 1422, 1493, 1498, 1515, 1524, 1552, 1598, 1641, 1880, 1903, 2071, 2131, 2143, 2209, 2232, 2262, 2272, 2298, 2443, 2474, 2504, 2794, 2857, 2915, 2926, 3170, 3236, 3238, 3392, 3475, 3595, 3608, 3808, 3838, 3885, 3936, 3957, 3979, 4090, 4127, 4150, 4157, 4212, 4322, 4327, 4364, 4472, 4486, 4510, 4582, 4603, 4640, 4647, 4684, 4785, 4790, 4960, 4973, 5081, 5131, 5151, 5172, 5239, 5325, 5362, 5363, 5446, 5461, 5473, 5494, 5562, 5565, 5601, 5659, 5672, 5775, 5846, 5852, 5853, 5894, 5906, 5979, 6028, 6097, 6162, 6170, 6358, 6445, 6465, 6502, 6564, 6630, 6740, 6795, 6812, 6875, 6881, 6919, 6984, 7001, 7350, 7416, 7418, 7432, 7439, 7447, 7516, 7543, 7589, 7704, 7755, 7786, 7952, 7954, 7975, 8036, 8202, 8203, 8302, 8363, 8431, 8528, 8571, 8622, 8673, 8852, 8853, 8889, 8918, 8947, 9103, 9129, 9148, 9203, 9213, 9214, 9241, 9289, 9294, 9392, 9437, 9495, 9659, 9809, 9872, 9949, 9962, 10025, 10109, 10169, 10387, 10421, 10570, 10593, 10708, 10759, 10922, 10952, 10961, 10977, 11329, 11341, 11342, 11368, 11415, 11436, 11437, 11629, 11683, 11757, 11830, 11836, 11993, 12147, 12315, 12437, 12547, 12746, 12787, 13008, 13486, 13491, 13523, 13605, 13702, 13723, 13749, 13763, 13973, 13992, 14312, 14491, 14616, 14637, 14652, 14847, 14861, 15146, 15196, 15321, 15325, 15515, 15669, 15757, 15862, 15951, 15977, 16125, 16408, 16640, 16786, 17150, 17197, 17237, 17358, 17618, 17619, 17781, 17831, 17874, 18024, 18067, 18124, 18129, 18194, 18293, 18469, 18837, 19089, 19236, 19246, 19462, 19502, 19560, 19712, 20102, 20244, 20315, 20441, 20481, 20647, 20675, 20756, 20959, 21156, 21300, 21416, 21558, 21610, 21885, 22178, 22516, 22572, 22701, 22731, 22831, 22834, 22991, 23067, 23094, 23103, 23167, 23195, 23258, 23292, 23497, 23539, 23567, 23763, 23765, 23856, 24035, 24095, 24124, 24344, 24409, 24448, 24523, 24605, 24619, 24787, 24891, 24932, 25066, 25091, 25137, 25179, 25480, 25850, 25852, 25865, 25899, 25909, 26205, 26220, 26222, 26254, 26262, 26375, 26387, 26546, 26670, 26732, 26763, 26773, 26777, 26807, 26834, 26844, 26887, 27326, 27646, 27649, 27782, 27835, 28270, 29620, 30245, 30374, 30409, 31120, 31178, 31179, 31611, 31961, 32377, 32470, 32506, 32630, 32901, 33084, 33329, 33586, 34069, 34354, 34923, 34942, 34975, 35142, 35489, 35633, 35683, 35753, 35964, 36350, 36503, 36523, 36856, 36904, 36958, 37199, 37217, 37340, 37502, 37530, 37699, 37745, 37812, 38153, 38196, 38265, 38438, 38583, 38820, 38888, 39385, 39697, 39947, 39972, 40033, 40106, 40107, 40160, 40192, 40211, 40335, 40375, 40415, 40440, 40445, 40473, 40687, 40761, 40969, 41145, 41503, 41647, 41649, 41659, 41694, 41795, 41892, 42152, 42153, 42187, 42191, 42197, 42202, 42256, 42573, 42643, 42664, 42671, 42673, 42679, 42723, 42774, 42775, 42790, 42804, 42905, 43033, 43066, 43293, 43301, 43374, 43398, 43517, 43541, 43559, 43644, 43705, 43776, 43777, 43935, 44032, 44417, 44938, 45057, 45066, 45077, 45091, 45116, 45341, 45798, 45992, 46040, 46058, 46199, 46462, 46503, 46696, 46699, 46910, 46989, 47087, 47109, 47149, 47232, 47395, 47402, 47504, 47531, 47625, 47630, 47740, 47757, 47775, 47812, 47835, 47953, 48014, 48121, 48122, 48182, 48241, 48283, 48375, 48421, 48462, 48505, 48548, 48557, 48594, 48597, 48617, 48626, 48634, 48686, 48777, 48852, 49057, 49063, 49067, 49160, 49207, 49211, 49235, 49247, 49257, 49282, 49375, 49483, 49538, 49612, 49792, 49804, 49805, 49812, 49818, 49823, 49832, 49881, 49936, 49938, 50022, 50038, 50069, 50174, 50242, 50248, 50256, 50436, 50479, 50484, 50572, 50586, 50627, 50684, 50710, 50773, 50842, 50859, 51018, 51019, 51026, 51048, 51073, 51085, 51110, 51114, 51153, 51225, 51227, 51228, 51341, 51342, 51372, 51391, 51407, 51513, 51541, 51591, 51617, 51624, 51716, 51730, 51872, 52083, 52092, 52136, 52166, 52167, 52176, 52230, 52282, 52393, 52474, 52583, 52675, 52731, 52748, 52825, 52860, 52865, 52869, 52916, 53064, 53154, 53226, 53503, 53542, 53577, 53660, 53695, 53697, 53756, 53757, 53785]
-
-Col: price
-Indices: [23825, 23826, 23827, 23828, 23829, 23830, 23831, 23832, 23833, 23834, 23835, 23836, 23837, 23838, 23839, 23840, 23841, 23842, 23843, 23844, 23845, 23846, 23847, 23848, 23849, 23850, 23851, 23852, 23853, 23854, 23855, 23856, 23857, 23858, 23859, 23860, 23861, 23862, 23863, 23864, 23865, 23866, 23867, 23868, 23869, 23870, 23871, 23872, 23873, 23874, 23875, 23876, 23877, 23878, 23879, 23880, 23881, 23882, 23883, 23884, 23885, 23886, 23887, 23888, 23889, 23890, 23891, 23892, 23893, 23894, 23895, 23896, 23897, 23898, 23899, 23900, 23901, 23902, 23903, 23904, 23905, 23906, 23907, 23908, 23909, 23910, 23911, 23912, 23913, 23914, 23915, 23916, 23917, 23918, 23919, 23920, 23921, 23922, 23923, 23924, 23925, 23926, 23927, 23928, 23929, 23930, 23931, 23932, 23933, 23934, 23935, 23936, 23937, 23938, 23939, 23940, 23941, 23942, 23943, 23944, 23945, 23946, 23947, 23948, 23949, 23950, 23951, 23952, 23953, 23954, 23955, 23956, 23957, 23958, 23959, 23960, 23961, 23962, 23963, 23964, 23965, 23966, 23967, 23968, 23969, 23970, 23971, 23972, 23973, 23974, 23975, 23976, 23977, 23978, 23980, 23981, 23982, 23983, 23984, 23985, 23986, 23987, 23988, 23989, 23990, 23991, 23992, 23993, 23994, 23995, 23996, 23997, 23998, 23999, 24000, 24001, 24002, 24003, 24004, 24005, 24006, 24007, 24008, 24009, 24010, 24011, 24012, 24013, 24014, 24015, 24016, 24017, 24018, 24019, 24020, 24021, 24022, 24023, 24024, 24025, 24026, 24027, 24028, 24029, 24060, 24061, 24062, 24063, 24064, 24065, 24066, 24067, 24068, 24069, 24070, 24071, 24072, 24073, 24074, 24075, 24076, 24077, 24078, 24079, 24080, 24081, 24082, 24083, 24084, 24085, 24086, 24087, 24088, 24089, 24090, 24091, 24092, 24093, 24094, 24095, 24096, 24097, 24098, 24099, 24100, 24101, 24102, 24103, 24104, 24105, 24106, 24107, 24108, 24109, 24110, 24111, 24112, 24113, 24114, 24115, 24116, 24117, 24118, 24119, 24120, 24121, 24122, 24123, 24124, 24125, 24126, 24127, 24128, 24129, 24130, 24131, 24132, 24133, 24134, 24135, 24136, 24137, 24138, 24139, 24140, 24141, 24142, 24143, 24144, 24145, 24146, 24147, 24148, 24149, 24150, 24151, 24152, 24153, 24154, 24155, 24156, 24157, 24158, 24159, 24160, 24162, 24163, 24164, 24165, 24166, 24167, 24168, 24169, 24170, 24171, 24172, 24173, 24174, 24175, 24176, 24177, 24178, 24179, 24180, 24181, 24182, 24183, 24184, 24185, 24186, 24187, 24188, 24189, 24190, 24191, 24192, 24193, 24194, 24195, 24196, 24197, 24198, 24199, 24200, 24201, 24202, 24203, 24204, 24205, 24206, 24207, 24208, 24209, 24210, 24211, 24212, 24213, 24214, 24215, 24216, 24217, 24218, 24219, 24220, 24221, 24222, 24223, 24224, 24225, 24226, 24227, 24228, 24229, 24230, 24231, 24232, 24233, 24234, 24235, 24236, 24237, 24238, 24239, 24240, 24241, 24242, 24243, 24244, 24245, 24246, 24247, 24248, 24249, 24250, 24251, 24252, 24253, 24254, 24255, 24256, 24257, 24258, 24259, 24260, 24261, 24262, 24263, 24264, 24265, 24266, 24267, 24268, 24269, 24270, 24271, 24272, 24273, 24274, 24275, 24276, 24277, 24278, 24279, 24280, 24281, 24282, 24283, 24284, 24285, 24286, 24287, 24288, 24289, 24290, 24291, 24292, 24293, 24294, 24295, 24296, 24297, 24298, 24299, 24300, 24301, 24302, 24303, 24304, 24305, 24306, 24307, 24308, 24309, 24310, 24311, 24312, 24313, 24314, 24315, 24316, 24317, 24318, 24319, 24320, 24321, 24322, 24323, 24324, 24325, 24326, 24327, 24328, 24329, 24330, 24331, 24332, 24333, 24334, 24335, 24336, 24337, 24338, 24339, 24340, 24341, 24342, 24343, 24344, 24345, 24346, 24347, 24348, 24349, 24350, 24351, 24352, 24353, 24354, 24355, 24356, 24357, 24358, 24359, 24390, 24391, 24392, 24393, 24394, 24395, 24396, 24397, 24398, 24399, 24400, 24401, 24402, 24403, 24404, 24405, 24406, 24407, 24408, 24409, 24410, 24411, 24412, 24413, 24414, 24415, 24416, 24417, 24418, 24419, 24420, 24421, 24422, 24423, 24424, 24425, 24426, 24427, 24428, 24429, 24430, 24431, 24432, 24433, 24434, 24435, 24436, 24437, 24438, 24439, 24440, 24441, 24442, 24443, 24444, 24445, 24446, 24447, 24448, 24449, 24450, 24451, 24452, 24453, 24454, 24455, 24456, 24457, 24458, 24459, 24460, 24461, 24462, 24463, 24464, 24465, 24466, 24467, 24468, 24469, 24470, 24471, 24472, 24473, 24474, 24475, 24476, 24477, 24478, 24479, 24480, 24481, 24482, 24483, 24484, 24485, 24486, 24487, 24488, 24489, 24490, 24491, 24492, 24493, 24494, 24495, 24496, 24497, 24498, 24499, 24500, 24501, 24502, 24503, 24504, 24505, 24506, 24507, 24508, 24509, 24510, 24511, 24512, 24513, 24514, 24515, 24516, 24517, 24518, 24519, 24520, 24521, 24522, 24523, 24524, 24525, 24526, 24527, 24528, 24529, 24530, 24531, 24532, 24533, 24534, 24535, 24536, 24537, 24538, 24539, 24540, 24541, 24542, 24543, 24544, 24545, 24546, 24547, 24548, 24549, 24550, 24551, 24552, 24553, 24554, 24555, 24556, 24557, 24558, 24559, 24560, 24561, 24562, 24563, 24564, 24565, 24566, 24567, 24568, 24569, 24570, 24571, 24572, 24573, 24574, 24575, 24576, 24577, 24578, 24579, 24580, 24581, 24582, 24583, 24584, 24585, 24586, 24587, 24588, 24589, 24590, 24591, 24592, 24593, 24594, 24595, 24596, 24597, 24598, 24599, 24600, 24601, 24602, 24603, 24604, 24605, 24606, 24607, 24608, 24609, 24610, 24611, 24612, 24613, 24614, 24615, 24616, 24617, 24618, 24619, 24620, 24621, 24622, 24623, 24624, 24625, 24626, 24627, 24628, 24629, 24630, 24631, 24632, 24633, 24634, 24635, 24636, 24637, 24638, 24639, 24640, 24641, 24642, 24643, 24644, 24645, 24646, 24647, 24648, 24649, 24650, 24651, 24652, 24653, 24654, 24655, 24656, 24657, 24658, 24659, 24660, 24661, 24662, 24663, 24664, 24665, 24666, 24667, 24668, 24669, 24670, 24671, 24672, 24673, 24674, 24675, 24676, 24677, 24678, 24679, 24680, 24681, 24682, 24683, 24684, 24685, 24686, 24687, 24688, 24689, 24720, 24721, 24722, 24723, 24724, 24725, 24726, 24727, 24728, 24729, 24730, 24731, 24732, 24733, 24734, 24735, 24736, 24737, 24738, 24739, 24740, 24741, 24742, 24743, 24744, 24745, 24746, 24747, 24748, 24749, 24750, 24751, 24752, 24753, 24754, 24755, 24756, 24757, 24758, 24759, 24760, 24761, 24762, 24763, 24764, 24765, 24766, 24767, 24768, 24769, 24770, 24771, 24772, 24773, 24774, 24775, 24776, 24777, 24778, 24779, 24780, 24781, 24782, 24783, 24784, 24785, 24786, 24787, 24788, 24789, 24790, 24791, 24792, 24793, 24794, 24795, 24796, 24797, 24798, 24799, 24800, 24801, 24802, 24803, 24804, 24805, 24806, 24807, 24808, 24809, 24810, 24811, 24812, 24813, 24814, 24815, 24816, 24817, 24818, 24819, 24820, 24821, 24822, 24823, 24824, 24825, 24826, 24827, 24828, 24829, 24830, 24831, 24832, 24833, 24834, 24835, 24836, 24837, 24838, 24839, 24840, 24841, 24842, 24843, 24844, 24845, 24846, 24847, 24848, 24849, 24850, 24851, 24852, 24853, 24854, 24855, 24856, 24857, 24858, 24859, 24860, 24861, 24862, 24864, 24865, 24866, 24867, 24868, 24869, 24870, 24871, 24872, 24873, 24874, 24875, 24876, 24877, 24878, 24879, 24880, 24881, 24882, 24883, 24884, 24885, 24886, 24887, 24888, 24889, 24890, 24891, 24892, 24893, 24894, 24895, 24896, 24897, 24898, 24899, 24900, 24901, 24902, 24903, 24904, 24905, 24906, 24907, 24908, 24909, 24910, 24911, 24912, 24913, 24914, 24915, 24916, 24917, 24918, 24919, 24920, 24921, 24922, 24923, 24924, 24925, 24926, 24927, 24928, 24929, 24930, 24931, 24932, 24933, 24934, 24935, 24936, 24937, 24938, 24939, 24940, 24941, 24942, 24943, 24944, 24945, 24946, 24947, 24948, 24949, 24950, 24951, 24952, 24953, 24954, 24955, 24956, 24957, 24958, 24959, 24960, 24961, 24962, 24963, 24964, 24965, 24966, 24967, 24968, 24969, 24970, 24971, 24972, 24973, 24974, 24975, 24976, 24977, 24978, 24979, 24980, 24981, 24982, 24983, 24984, 24985, 24986, 24987, 24988, 24989, 24990, 24991, 24992, 24993, 24994, 24995, 24996, 24997, 24998, 24999, 25000, 25001, 25002, 25003, 25004, 25005, 25006, 25007, 25008, 25009, 25010, 25011, 25012, 25013, 25014, 25015, 25016, 25017, 25018, 25019, 25050, 25051, 25052, 25053, 25054, 25055, 25056, 25057, 25058, 25059, 25060, 25061, 25062, 25063, 25064, 25065, 25066, 25067, 25068, 25069, 25070, 25071, 25072, 25073, 25074, 25075, 25076, 25077, 25078, 25079, 25080, 25081, 25082, 25083, 25084, 25085, 25086, 25087, 25088, 25089, 25090, 25091, 25092, 25093, 25094, 25095, 25096, 25097, 25098, 25099, 25100, 25101, 25102, 25103, 25104, 25105, 25106, 25107, 25108, 25109, 25110, 25111, 25112, 25113, 25114, 25115, 25116, 25117, 25118, 25119, 25120, 25121, 25122, 25123, 25124, 25125, 25126, 25127, 25128, 25129, 25130, 25131, 25132, 25133, 25134, 25135, 25136, 25137, 25138, 25139, 25140, 25141, 25142, 25143, 25144, 25145, 25146, 25147, 25148, 25149, 25150, 25151, 25152, 25153, 25154, 25155, 25156, 25157, 25158, 25159, 25160, 25161, 25162, 25163, 25164, 25165, 25166, 25167, 25168, 25169, 25170, 25171, 25172, 25173, 25174, 25175, 25176, 25177, 25178, 25179, 25180, 25181, 25182, 25183, 25184, 25185, 25186, 25187, 25188, 25189, 25190, 25191, 25192, 25193, 25194, 25195, 25196, 25197, 25198, 25199, 25200, 25201, 25202, 25203, 25204, 25205, 25206, 25207, 25208, 25209, 25210, 25211, 25212, 25213, 25214, 25215, 25216, 25217, 25218, 25219, 25220, 25221, 25222, 25223, 25224, 25225, 25226, 25227, 25228, 25229, 25230, 25231, 25232, 25233, 25234, 25235, 25236, 25237, 25238, 25239, 25240, 25241, 25242, 25243, 25244, 25245, 25246, 25247, 25248, 25249, 25250, 25251, 25252, 25253, 25254, 25255, 25256, 25257, 25258, 25259, 25260, 25261, 25262, 25263, 25264, 25265, 25266, 25267, 25268, 25269, 25270, 25271, 25272, 25273, 25274, 25275, 25276, 25277, 25278, 25279, 25280, 25281, 25282, 25283, 25284, 25285, 25286, 25287, 25288, 25289, 25290, 25291, 25292, 25293, 25294, 25295, 25296, 25297, 25298, 25299, 25300, 25301, 25302, 25303, 25304, 25305, 25306, 25307, 25308, 25309, 25310, 25311, 25312, 25313, 25314, 25315, 25316, 25317, 25318, 25319, 25320, 25321, 25322, 25323, 25324, 25325, 25326, 25327, 25328, 25329, 25330, 25331, 25332, 25333, 25334, 25335, 25336, 25337, 25338, 25340, 25341, 25342, 25343, 25344, 25345, 25346, 25347, 25348, 25349, 25380, 25381, 25382, 25383, 25384, 25385, 25386, 25387, 25388, 25389, 25390, 25391, 25392, 25393, 25394, 25395, 25396, 25397, 25398, 25399, 25400, 25401, 25402, 25403, 25404, 25405, 25406, 25407, 25408, 25409, 25410, 25411, 25412, 25413, 25414, 25415, 25416, 25417, 25418, 25419, 25420, 25421, 25422, 25423, 25424, 25425, 25426, 25427, 25428, 25429, 25430, 25431, 25432, 25433, 25434, 25435, 25436, 25437, 25438, 25439, 25440, 25441, 25442, 25443, 25444, 25445, 25446, 25447, 25448, 25449, 25450, 25451, 25452, 25453, 25454, 25455, 25456, 25457, 25458, 25459, 25460, 25461, 25462, 25463, 25464, 25465, 25466, 25467, 25468, 25469, 25470, 25471, 25472, 25473, 25474, 25475, 25476, 25477, 25478, 25479, 25480, 25481, 25482, 25483, 25484, 25485, 25486, 25487, 25488, 25489, 25490, 25491, 25492, 25493, 25494, 25495, 25496, 25497, 25498, 25499, 25500, 25501, 25502, 25503, 25504, 25505, 25506, 25507, 25508, 25509, 25510, 25511, 25512, 25513, 25514, 25515, 25516, 25517, 25518, 25519, 25520, 25521, 25522, 25523, 25524, 25525, 25526, 25527, 25528, 25529, 25530, 25531, 25532, 25533, 25534, 25535, 25536, 25537, 25538, 25539, 25540, 25541, 25542, 25543, 25544, 25545, 25546, 25547, 25548, 25549, 25550, 25551, 25552, 25553, 25554, 25555, 25556, 25557, 25558, 25559, 25560, 25561, 25562, 25563, 25564, 25565, 25566, 25567, 25568, 25569, 25570, 25571, 25572, 25573, 25574, 25575, 25576, 25577, 25578, 25579, 25580, 25581, 25582, 25583, 25584, 25585, 25586, 25587, 25588, 25589, 25590, 25591, 25592, 25593, 25594, 25595, 25596, 25597, 25598, 25599, 25600, 25601, 25602, 25603, 25604, 25605, 25606, 25607, 25608, 25609, 25610, 25611, 25612, 25613, 25614, 25615, 25616, 25617, 25618, 25619, 25620, 25621, 25622, 25623, 25624, 25625, 25626, 25627, 25628, 25629, 25630, 25631, 25632, 25633, 25634, 25635, 25636, 25637, 25638, 25639, 25640, 25641, 25642, 25643, 25644, 25645, 25646, 25647, 25648, 25649, 25650, 25651, 25652, 25653, 25654, 25655, 25656, 25657, 25658, 25659, 25660, 25661, 25662, 25663, 25664, 25665, 25666, 25667, 25668, 25669, 25670, 25671, 25672, 25673, 25674, 25675, 25676, 25677, 25678, 25679, 25710, 25711, 25712, 25713, 25714, 25715, 25716, 25717, 25718, 25719, 25720, 25721, 25722, 25723, 25724, 25725, 25726, 25727, 25728, 25729, 25730, 25731, 25732, 25733, 25734, 25735, 25736, 25737, 25738, 25739, 25740, 25741, 25742, 25743, 25744, 25745, 25746, 25747, 25748, 25749, 25750, 25751, 25752, 25753, 25754, 25755, 25756, 25757, 25758, 25759, 25760, 25761, 25762, 25763, 25764, 25765, 25766, 25767, 25768, 25769, 25770, 25771, 25772, 25773, 25774, 25775, 25776, 25777, 25778, 25779, 25780, 25781, 25782, 25783, 25784, 25785, 25786, 25787, 25788, 25789, 25790, 25791, 25792, 25793, 25794, 25795, 25796, 25797, 25798, 25799, 25800, 25801, 25802, 25803, 25804, 25805, 25806, 25807, 25808, 25809, 25810, 25811, 25812, 25813, 25814, 25815, 25816, 25817, 25818, 25819, 25820, 25821, 25822, 25823, 25824, 25825, 25826, 25827, 25828, 25829, 25830, 25831, 25832, 25833, 25834, 25835, 25836, 25837, 25838, 25839, 25840, 25841, 25842, 25843, 25844, 25845, 25846, 25847, 25848, 25849, 25850, 25851, 25852, 25853, 25854, 25855, 25856, 25857, 25858, 25859, 25860, 25861, 25862, 25863, 25864, 25865, 25866, 25867, 25868, 25869, 25870, 25871, 25872, 25873, 25874, 25875, 25876, 25877, 25878, 25879, 25880, 25881, 25882, 25883, 25884, 25885, 25886, 25887, 25888, 25889, 25890, 25891, 25892, 25893, 25894, 25895, 25896, 25897, 25898, 25899, 25900, 25901, 25902, 25903, 25904, 25905, 25906, 25907, 25908, 25909, 25910, 25911, 25912, 25913, 25914, 25915, 25916, 25917, 25918, 25919, 25920, 25921, 25922, 25923, 25924, 25925, 25926, 25927, 25928, 25929, 25930, 25931, 25932, 25933, 25934, 25935, 25936, 25937, 25938, 25939, 25940, 25941, 25943, 25944, 25945, 25946, 25947, 25948, 25949, 25950, 25951, 25952, 25953, 25954, 25955, 25956, 25957, 25958, 25959, 25960, 25961, 25962, 25963, 25964, 25965, 25966, 25967, 25968, 25969, 25970, 25971, 25972, 25973, 25974, 25975, 25976, 25977, 25978, 25979, 25980, 25981, 25982, 25983, 25984, 25985, 25986, 25987, 25988, 25989, 25990, 25991, 25992, 25993, 25994, 25995, 25996, 25997, 25998, 25999, 26000, 26001, 26002, 26003, 26004, 26005, 26006, 26007, 26008, 26009, 26040, 26041, 26042, 26043, 26044, 26045, 26046, 26047, 26048, 26049, 26050, 26051, 26052, 26053, 26054, 26055, 26056, 26057, 26058, 26059, 26060, 26061, 26062, 26063, 26064, 26065, 26066, 26067, 26068, 26069, 26070, 26072, 26073, 26074, 26075, 26076, 26077, 26078, 26079, 26080, 26081, 26082, 26083, 26084, 26085, 26086, 26087, 26088, 26089, 26090, 26091, 26092, 26093, 26094, 26095, 26096, 26097, 26098, 26099, 26100, 26101, 26102, 26103, 26104, 26105, 26106, 26107, 26108, 26109, 26110, 26111, 26112, 26113, 26114, 26115, 26116, 26117, 26118, 26119, 26120, 26121, 26122, 26123, 26124, 26125, 26126, 26127, 26128, 26129, 26130, 26131, 26132, 26133, 26134, 26135, 26136, 26137, 26138, 26139, 26140, 26141, 26142, 26143, 26144, 26145, 26146, 26147, 26148, 26149, 26150, 26151, 26152, 26153, 26154, 26155, 26156, 26157, 26158, 26159, 26160, 26161, 26162, 26163, 26164, 26165, 26166, 26167, 26168, 26169, 26170, 26171, 26172, 26173, 26174, 26175, 26176, 26177, 26178, 26179, 26180, 26181, 26182, 26183, 26184, 26185, 26186, 26187, 26188, 26189, 26190, 26191, 26192, 26193, 26194, 26195, 26196, 26197, 26198, 26199, 26200, 26201, 26202, 26203, 26204, 26205, 26206, 26207, 26208, 26209, 26210, 26211, 26212, 26213, 26214, 26215, 26216, 26217, 26218, 26219, 26220, 26221, 26222, 26223, 26224, 26225, 26226, 26227, 26228, 26229, 26230, 26231, 26232, 26233, 26234, 26235, 26236, 26237, 26238, 26239, 26240, 26241, 26242, 26243, 26244, 26245, 26246, 26247, 26248, 26249, 26250, 26251, 26252, 26253, 26254, 26255, 26256, 26257, 26258, 26259, 26260, 26261, 26262, 26263, 26264, 26265, 26266, 26267, 26268, 26269, 26270, 26271, 26272, 26273, 26274, 26275, 26276, 26277, 26278, 26279, 26280, 26281, 26282, 26283, 26284, 26285, 26286, 26287, 26288, 26289, 26290, 26291, 26292, 26293, 26294, 26295, 26296, 26297, 26298, 26299, 26300, 26301, 26302, 26303, 26304, 26305, 26306, 26307, 26308, 26309, 26310, 26311, 26312, 26313, 26314, 26315, 26316, 26317, 26318, 26319, 26320, 26321, 26322, 26323, 26324, 26325, 26326, 26327, 26328, 26329, 26330, 26331, 26332, 26333, 26334, 26335, 26336, 26337, 26338, 26339, 26370, 26371, 26372, 26373, 26374, 26375, 26376, 26377, 26378, 26379, 26380, 26381, 26382, 26383, 26384, 26385, 26386, 26387, 26388, 26389, 26390, 26391, 26392, 26393, 26394, 26395, 26396, 26397, 26398, 26399, 26400, 26401, 26402, 26403, 26404, 26405, 26406, 26407, 26408, 26409, 26410, 26411, 26412, 26413, 26414, 26416, 26417, 26418, 26419, 26420, 26421, 26422, 26423, 26424, 26425, 26426, 26427, 26428, 26429, 26430, 26431, 26432, 26433, 26434, 26435, 26436, 26437, 26438, 26439, 26440, 26441, 26442, 26443, 26444, 26445, 26446, 26447, 26448, 26449, 26450, 26451, 26452, 26453, 26454, 26455, 26456, 26457, 26458, 26459, 26460, 26461, 26462, 26463, 26464, 26465, 26466, 26467, 26468, 26469, 26470, 26471, 26472, 26473, 26474, 26475, 26476, 26477, 26478, 26479, 26480, 26481, 26482, 26483, 26484, 26485, 26486, 26487, 26488, 26489, 26490, 26491, 26492, 26493, 26494, 26495, 26496, 26497, 26498, 26499, 26500, 26501, 26502, 26503, 26504, 26505, 26506, 26507, 26508, 26509, 26510, 26511, 26512, 26513, 26514, 26515, 26516, 26517, 26518, 26519, 26520, 26521, 26522, 26523, 26524, 26525, 26526, 26527, 26528, 26529, 26530, 26531, 26532, 26533, 26534, 26535, 26536, 26537, 26538, 26539, 26540, 26541, 26542, 26543, 26544, 26545, 26546, 26547, 26548, 26549, 26550, 26551, 26552, 26553, 26555, 26556, 26557, 26558, 26559, 26560, 26561, 26562, 26563, 26564, 26565, 26566, 26567, 26568, 26569, 26570, 26571, 26572, 26573, 26574, 26575, 26576, 26577, 26578, 26579, 26580, 26581, 26582, 26583, 26584, 26585, 26586, 26587, 26588, 26589, 26590, 26591, 26592, 26593, 26594, 26595, 26596, 26597, 26598, 26599, 26600, 26601, 26602, 26603, 26604, 26605, 26606, 26607, 26609, 26610, 26611, 26612, 26613, 26614, 26615, 26616, 26617, 26618, 26619, 26620, 26621, 26622, 26623, 26624, 26625, 26626, 26627, 26628, 26629, 26630, 26631, 26632, 26633, 26634, 26635, 26636, 26637, 26638, 26639, 26640, 26641, 26642, 26643, 26644, 26645, 26646, 26647, 26648, 26649, 26650, 26651, 26652, 26653, 26654, 26655, 26656, 26657, 26658, 26659, 26660, 26661, 26662, 26663, 26664, 26665, 26666, 26667, 26668, 26669, 26730, 26731, 26732, 26733, 26734, 26735, 26736, 26737, 26738, 26739, 26740, 26741, 26742, 26743, 26744, 26745, 26746, 26747, 26748, 26749, 26750, 26751, 26752, 26753, 26754, 26755, 26756, 26757, 26758, 26759, 26760, 26761, 26762, 26763, 26764, 26765, 26766, 26767, 26768, 26769, 26770, 26771, 26772, 26773, 26774, 26775, 26776, 26777, 26778, 26779, 26780, 26781, 26782, 26783, 26784, 26785, 26786, 26787, 26788, 26789, 26790, 26791, 26792, 26793, 26794, 26795, 26796, 26797, 26798, 26799, 26800, 26801, 26802, 26803, 26804, 26805, 26806, 26807, 26808, 26809, 26810, 26811, 26812, 26813, 26814, 26815, 26816, 26817, 26818, 26819, 26820, 26821, 26822, 26823, 26824, 26825, 26826, 26827, 26828, 26829, 26830, 26831, 26832, 26833, 26834, 26835, 26836, 26837, 26838, 26839, 26840, 26841, 26842, 26843, 26844, 26845, 26846, 26847, 26848, 26849, 26850, 26851, 26852, 26853, 26854, 26855, 26856, 26857, 26858, 26859, 26860, 26861, 26862, 26863, 26864, 26865, 26866, 26867, 26868, 26869, 26870, 26871, 26872, 26873, 26874, 26875, 26876, 26877, 26878, 26879, 26880, 26881, 26882, 26883, 26884, 26885, 26886, 26887, 26888, 26889, 26890, 26891, 26892, 26893, 26894, 26895, 26896, 26897, 26898, 26899, 26900, 26901, 26902, 26903, 26904, 26905, 26906, 26907, 26908, 26909, 26910, 26911, 26912, 26913, 26914, 26915, 26916, 26917, 26918, 26919, 26920, 26921, 26922, 26923, 26924, 26925, 26926, 26927, 26928, 26929, 26930, 26931, 26932, 26933, 26934, 26935, 26936, 26937, 26938, 26939, 26940, 26941, 26942, 26943, 26944, 26945, 26946, 26947, 26948, 26949, 26950, 26951, 26952, 26953, 26954, 26955, 26956, 26957, 26958, 26959, 26960, 26961, 26962, 26963, 26964, 26965, 26966, 26967, 26968, 26969, 26970, 26971, 26972, 26973, 26974, 26975, 26976, 26977, 26978, 26979, 26980, 26981, 26982, 26983, 26984, 26985, 26986, 26987, 26988, 26989, 26990, 26991, 26992, 26993, 26994, 26995, 26996, 26997, 26998, 26999, 27000, 27001, 27002, 27003, 27004, 27005, 27006, 27007, 27008, 27009, 27010, 27011, 27012, 27013, 27014, 27015, 27016, 27017, 27018, 27019, 27020, 27021, 27022, 27023, 27024, 27025, 27026, 27028, 27029, 27060, 27061, 27062, 27063, 27064, 27065, 27066, 27067, 27068, 27069, 27070, 27071, 27072, 27073, 27074, 27075, 27076, 27077, 27078, 27079, 27080, 27081, 27082, 27083, 27084, 27085, 27086, 27087, 27088, 27089, 27090, 27091, 27092, 27093, 27094, 27095, 27096, 27097, 27098, 27099, 27100, 27101, 27102, 27103, 27104, 27105, 27106, 27107, 27108, 27109, 27110, 27111, 27112, 27113, 27114, 27115, 27116, 27117, 27118, 27119, 27120, 27121, 27122, 27123, 27124, 27125, 27126, 27127, 27128, 27129, 27130, 27131, 27132, 27133, 27134, 27135, 27136, 27137, 27138, 27139, 27140, 27141, 27142, 27143, 27144, 27145, 27146, 27147, 27148, 27149, 27150, 27151, 27152, 27153, 27154, 27155, 27156, 27157, 27158, 27159, 27160, 27161, 27162, 27163, 27164, 27165, 27166, 27167, 27168, 27169, 27170, 27171, 27172, 27173, 27174, 27175, 27176, 27177, 27178, 27179, 27180, 27181, 27182, 27183, 27184, 27185, 27186, 27187, 27188, 27189, 27190, 27191, 27192, 27193, 27194, 27195, 27196, 27197, 27198, 27199, 27200, 27201, 27202, 27203, 27204, 27205, 27206, 27207, 27208, 27209, 27210, 27211, 27212, 27213, 27214, 27215, 27216, 27217, 27218, 27219, 27220, 27221, 27222, 27223, 27224, 27225, 27226, 27227, 27228, 27229, 27230, 27231, 27232, 27233, 27234, 27235, 27236, 27237, 27238, 27239, 27240, 27241, 27242, 27243, 27244, 27245, 27246, 27247, 27248, 27249, 27250, 27251, 27252, 27253, 27254, 27255, 27256, 27257, 27258, 27259, 27260, 27261, 27262, 27263, 27264, 27265, 27266, 27267, 27268, 27269, 27270, 27271, 27272, 27273, 27274, 27275, 27276, 27277, 27278, 27279, 27280, 27281, 27282, 27283, 27284, 27285, 27286, 27287, 27288, 27289, 27290, 27291, 27292, 27293, 27294, 27295, 27296, 27297, 27298, 27299, 27300, 27301, 27302, 27303, 27304, 27305, 27306, 27307, 27308, 27309, 27310, 27311, 27312, 27313, 27314, 27315, 27316, 27317, 27318, 27319, 27320, 27321, 27322, 27323, 27324, 27325, 27326, 27327, 27328, 27329, 27330, 27331, 27332, 27333, 27334, 27335, 27336, 27337, 27338, 27339, 27340, 27341, 27342, 27343, 27344, 27345, 27346, 27347, 27348, 27349, 27350, 27351, 27352, 27353, 27354, 27355, 27356, 27357, 27358, 27359, 27390, 27391, 27392, 27393, 27394, 27395, 27396, 27397, 27398, 27399, 27400, 27401, 27402, 27403, 27404, 27405, 27406, 27407, 27408, 27409, 27410, 27411, 27412, 27413, 27414, 27415, 27416, 27417, 27418, 27419, 27420, 27421, 27422, 27423, 27424, 27425, 27426, 27427, 27428, 27429, 27430, 27431, 27432, 27433, 27434, 27435, 27436, 27437, 27438, 27439, 27440, 27441, 27442, 27443, 27444, 27445, 27446, 27447, 27448, 27449, 27450, 27451, 27452, 27453, 27454, 27455, 27456, 27457, 27458, 27459, 27460, 27461, 27462, 27463, 27464, 27465, 27466, 27467, 27468, 27469, 27470, 27471, 27472, 27473, 27474, 27475, 27476, 27477, 27478, 27479, 27480, 27481, 27482, 27483, 27484, 27485, 27486, 27487, 27488, 27489, 27490, 27491, 27492, 27493, 27494, 27495, 27496, 27497, 27498, 27499, 27500, 27501, 27502, 27503, 27504, 27505, 27506, 27507, 27508, 27509, 27510, 27511, 27512, 27513, 27514, 27515, 27517, 27519, 27520, 27521, 27522, 27523, 27524, 27525, 27526, 27527, 27528, 27529, 27530, 27531, 27532, 27533, 27534, 27535, 27536, 27537, 27538, 27539, 27540, 27541, 27542, 27543, 27544, 27545, 27546, 27547, 27548, 27549, 27550, 27551, 27552, 27553, 27554, 27555, 27556, 27557, 27558, 27559, 27560, 27561, 27562, 27563, 27564, 27565, 27566, 27567, 27568, 27569, 27570, 27571, 27572, 27573, 27574, 27575, 27576, 27577, 27578, 27579, 27580, 27581, 27582, 27583, 27584, 27585, 27586, 27587, 27588, 27589, 27590, 27591, 27592, 27593, 27594, 27595, 27596, 27597, 27598, 27599, 27600, 27601, 27602, 27603, 27604, 27605, 27606, 27607, 27608, 27609, 27610, 27611, 27612, 27613, 27614, 27615, 27616, 27617, 27618, 27619, 27620, 27621, 27622, 27623, 27624, 27625, 27626, 27627, 27628, 27629, 27630, 27631, 27632, 27633, 27634, 27635, 27636, 27637, 27638, 27639, 27640, 27641, 27642, 27643, 27644, 27645, 27646, 27647, 27648, 27649, 27650, 27651, 27652, 27653, 27654, 27655, 27656, 27657, 27658, 27659, 27660, 27661, 27662, 27663, 27664, 27665, 27666, 27667, 27668, 27669, 27670, 27671, 27672, 27673, 27674, 27675, 27676, 27677, 27678, 27679, 27680, 27681, 27682, 27683, 27684, 27685, 27686, 27687, 27688, 27689, 27720, 27721, 27722, 27723, 27724, 27725, 27726, 27727, 27728, 27729, 27730, 27731, 27732, 27733, 27734, 27735, 27736, 27737, 27738, 27739, 27740, 27741, 27742, 27743, 27744, 27745, 27746, 27747, 27748, 27749]
 
 Col: x
 Indices: [11182, 11963, 15951, 22741, 22831, 23644, 24131, 24297, 24328, 24520, 24816, 25460, 25850, 25998, 25999, 26243, 26431, 26444, 26534, 26932, 27130, 27415, 27429, 27514, 27630, 27638, 27649, 27679, 27684, 27685, 49556]
@@ -8160,7 +8154,7 @@ Indices: [2207, 2314, 4791, 5471, 10167, 11182, 11963, 13601, 14635, 15951, 1628
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [162]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [224]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">corr</span> <span class="o">=</span> <span class="n">diamonds_df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">'number'</span><span class="p">])</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
@@ -8188,7 +8182,7 @@ Indices: [2207, 2314, 4791, 5471, 10167, 11182, 11963, 13601, 14635, 15951, 1628
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [163]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [225]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">catplot</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
@@ -8210,7 +8204,7 @@ Indices: [2207, 2314, 4791, 5471, 10167, 11182, 11963, 13601, 14635, 15951, 1628
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [164]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [226]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">catplot</span><span class="p">(</span><span class="n">diamonds_df</span><span class="p">)</span>
@@ -8259,7 +8253,7 @@ Indices: [2207, 2314, 4791, 5471, 10167, 11182, 11963, 13601, 14635, 15951, 1628
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [165]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [227]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">nums</span> <span class="o">=</span> <span class="n">diamonds_df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">'number'</span><span class="p">])</span>
@@ -8274,7 +8268,7 @@ Indices: [2207, 2314, 4791, 5471, 10167, 11182, 11963, 13601, 14635, 15951, 1628
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[165]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[227]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -8427,7 +8421,7 @@ Indices: [2207, 2314, 4791, 5471, 10167, 11182, 11963, 13601, 14635, 15951, 1628
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [166]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [228]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">cats</span> <span class="o">=</span> <span class="n">diamonds_df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">'object'</span><span class="p">,</span> <span class="s1">'category'</span><span class="p">])</span>
@@ -8443,7 +8437,7 @@ Indices: [2207, 2314, 4791, 5471, 10167, 11182, 11963, 13601, 14635, 15951, 1628
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[166]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[228]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -8716,11 +8710,10 @@ Indices: [2207, 2314, 4791, 5471, 10167, 11182, 11963, 13601, 14635, 15951, 1628
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [167]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [229]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">nums</span><span class="p">,</span> <span class="n">cats</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'price'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">X_temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">nums</span><span class="p">,</span> <span class="n">cats</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'price'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">diamonds_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'price'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">diamonds_df</span><span class="p">[</span><span class="s1">'price'</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -8743,7 +8736,7 @@ Indices: [2207, 2314, 4791, 5471, 10167, 11182, 11963, 13601, 14635, 15951, 1628
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [168]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [230]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.20</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
@@ -8763,18 +8756,83 @@ Indices: [2207, 2314, 4791, 5471, 10167, 11182, 11963, 13601, 14635, 15951, 1628
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [169]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [231]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">sc</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
-<span class="n">X_train</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
-<span class="n">X_test</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># PIPELINE</span>
+<span class="c1"># create preprocessor</span>
+<span class="n">numeric_transformer</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="p">[</span>
+    <span class="p">(</span><span class="s1">'scaler'</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">())</span>
+<span class="p">])</span>
+
+<span class="n">categorical_transformer</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="p">[</span>
+    <span class="p">(</span><span class="s1">'onehot'</span><span class="p">,</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s1">'ignore'</span><span class="p">,</span> <span class="n">sparse_output</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="p">])</span>
+
+<span class="n">preprocessor</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span>
+    <span class="n">transformers</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s1">'num'</span><span class="p">,</span> <span class="n">numeric_transformer</span><span class="p">,</span> <span class="n">num_cols</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">'cat'</span><span class="p">,</span> <span class="n">categorical_transformer</span><span class="p">,</span> <span class="n">cat_cols</span><span class="p">)</span>
+    <span class="p">])</span>
+
+<span class="c1"># create pipelines</span>
+<span class="n">steps</span><span class="o">=</span><span class="p">[</span>
+    <span class="p">(</span><span class="s1">'preprocessor'</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">'model'</span><span class="p">,</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">))</span>
+    
+<span class="p">]</span>
+
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="n">steps</span><span class="p">)</span>
+<span class="n">pipe</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[231]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<style>#sk-container-id-11 {color: black;background-color: white;}#sk-container-id-11 pre{padding: 0;}#sk-container-id-11 div.sk-toggleable {background-color: white;}#sk-container-id-11 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-11 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-11 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-11 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-11 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-11 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-11 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-11 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-11 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-11 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-11 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-11 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-11 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-11 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-11 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-11 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-11 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-11 div.sk-item {position: relative;z-index: 1;}#sk-container-id-11 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-11 div.sk-item::before, #sk-container-id-11 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-11 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-11 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-11 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-11 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-11 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-11 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-11 div.sk-label-container {text-align: center;}#sk-container-id-11 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-11 div.sk-text-repr-fallback {display: none;}</style><div class="sk-top-container" id="sk-container-id-11"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[('preprocessor',
+                 ColumnTransformer(transformers=[('num',
+                                                  Pipeline(steps=[('scaler',
+                                                                   StandardScaler())]),
+                                                  ['carat', 'depth', 'table',
+                                                   'x', 'y', 'z']),
+                                                 ('cat',
+                                                  Pipeline(steps=[('onehot',
+                                                                   OneHotEncoder(handle_unknown='ignore',
+                                                                                 sparse_output=False))]),
+                                                  ['cut', 'color',
+                                                   'clarity'])])),
+                ('model', RandomForestRegressor(random_state=42))])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br/>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-71" type="checkbox"/><label class="sk-toggleable__label sk-toggleable__label-arrow" for="sk-estimator-id-71">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[('preprocessor',
+                 ColumnTransformer(transformers=[('num',
+                                                  Pipeline(steps=[('scaler',
+                                                                   StandardScaler())]),
+                                                  ['carat', 'depth', 'table',
+                                                   'x', 'y', 'z']),
+                                                 ('cat',
+                                                  Pipeline(steps=[('onehot',
+                                                                   OneHotEncoder(handle_unknown='ignore',
+                                                                                 sparse_output=False))]),
+                                                  ['cut', 'color',
+                                                   'clarity'])])),
+                ('model', RandomForestRegressor(random_state=42))])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-72" type="checkbox"/><label class="sk-toggleable__label sk-toggleable__label-arrow" for="sk-estimator-id-72">preprocessor: ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(transformers=[('num',
+                                 Pipeline(steps=[('scaler', StandardScaler())]),
+                                 ['carat', 'depth', 'table', 'x', 'y', 'z']),
+                                ('cat',
+                                 Pipeline(steps=[('onehot',
+                                                  OneHotEncoder(handle_unknown='ignore',
+                                                                sparse_output=False))]),
+                                 ['cut', 'color', 'clarity'])])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-73" type="checkbox"/><label class="sk-toggleable__label sk-toggleable__label-arrow" for="sk-estimator-id-73">num</label><div class="sk-toggleable__content"><pre>['carat', 'depth', 'table', 'x', 'y', 'z']</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-74" type="checkbox"/><label class="sk-toggleable__label sk-toggleable__label-arrow" for="sk-estimator-id-74">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-75" type="checkbox"/><label class="sk-toggleable__label sk-toggleable__label-arrow" for="sk-estimator-id-75">cat</label><div class="sk-toggleable__content"><pre>['cut', 'color', 'clarity']</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-76" type="checkbox"/><label class="sk-toggleable__label sk-toggleable__label-arrow" for="sk-estimator-id-76">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown='ignore', sparse_output=False)</pre></div></div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-77" type="checkbox"/><label class="sk-toggleable__label sk-toggleable__label-arrow" for="sk-estimator-id-77">RandomForestRegressor</label><div class="sk-toggleable__content"><pre>RandomForestRegressor(random_state=42)</pre></div></div></div></div></div></div></div>
 </div>
 </div>
 </div>
@@ -8786,7 +8844,7 @@ Indices: [2207, 2314, 4791, 5471, 10167, 11182, 11963, 13601, 14635, 15951, 1628
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="KNN-Regression">KNN Regression<a class="anchor-link" href="#KNN-Regression">¶</a></h3>
+<h3 id="Performance-metrics">Performance metrics<a class="anchor-link" href="#Performance-metrics">¶</a></h3>
 </div>
 </div>
 </div>
@@ -8795,7 +8853,7 @@ Indices: [2207, 2314, 4791, 5471, 10167, 11182, 11963, 13601, 14635, 15951, 1628
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [170]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [232]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">adj_r2_score</span><span class="p">(</span><span class="n">predictors</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">predictions</span><span class="p">):</span>
@@ -8813,7 +8871,7 @@ Indices: [2207, 2314, 4791, 5471, 10167, 11182, 11963, 13601, 14635, 15951, 1628
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [171]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [233]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">mape_score</span><span class="p">(</span><span class="n">targets</span><span class="p">,</span> <span class="n">predictions</span><span class="p">):</span>
@@ -8828,7 +8886,7 @@ Indices: [2207, 2314, 4791, 5471, 10167, 11182, 11963, 13601, 14635, 15951, 1628
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [172]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [234]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Function to compute different metrics to check performance of a regression model</span>
@@ -8868,144 +8926,6 @@ Indices: [2207, 2314, 4791, 5471, 10167, 11182, 11963, 13601, 14635, 15951, 1628
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [173]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># error_rate = []</span>
-<span class="c1"># for i in range(1,40):</span>
-<span class="c1">#  knn = KNeighborsRegressor(n_neighbors=i)</span>
-<span class="c1">#  knn.fit(X_train,y_train)</span>
-<span class="c1">#  pred_i = knn.predict(X_test)</span>
-<span class="c1">#  error_rate.append(np.mean(pred_i != y_test))</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [174]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># plt.figure(figsize=(10,6))</span>
-<span class="c1"># plt.plot(range(1,40),error_rate,color='blue', linestyle='dashed',marker='o',markerfacecolor='red', markersize=10)</span>
-<span class="c1"># plt.title('Error Rate vs. K Value')</span>
-<span class="c1"># plt.xlabel('K')</span>
-<span class="c1"># plt.ylabel('Error Rate')</span>
-<span class="c1"># req_k_value = error_rate.index(min(error_rate))+1</span>
-<span class="c1"># print("Minimum error: ",min(error_rate),"at K =",req_k_value)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [175]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">knn_reg</span> <span class="o">=</span> <span class="n">KNeighborsRegressor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-
-<span class="c1"># train model</span>
-<span class="n">reg</span> <span class="o">=</span> <span class="n">knn_reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-
-<span class="c1"># predictions</span>
-<span class="n">yhat1</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-<span class="n">yhat1</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[175]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>array([ 2015.33333333,  3937.33333333,  1879.66666667, ...,
-         860.66666667, 14574.66666667,   847.        ])</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [176]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># test performance</span>
-<span class="n">model_performance_regression</span><span class="p">(</span><span class="n">reg</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="c1"># also very good adj r squared</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[176]:</div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>MSE</th>
-<th>RMSE</th>
-<th>MAE</th>
-<th>R-squared</th>
-<th>Adj. R-squared</th>
-<th>MAPE</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>0</th>
-<td>712659.50362</td>
-<td>844.191627</td>
-<td>420.970877</td>
-<td>0.953244</td>
-<td>0.953144</td>
-<td>11.971762</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -9017,33 +8937,15 @@ Indices: [2207, 2314, 4791, 5471, 10167, 11182, 11963, 13601, 14635, 15951, 1628
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [177]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
-<span class="n">rf_reg</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
-
-<span class="c1">#training the algorithm on training set</span>
-<span class="n">reg</span> <span class="o">=</span> <span class="n">rf_reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [178]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [235]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">model_performance_regression</span><span class="p">(</span><span class="n">reg</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="c1"># very good adj r squared as well</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">pipe</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -9054,7 +8956,64 @@ Indices: [2207, 2314, 4791, 5471, 10167, 11182, 11963, 13601, 14635, 15951, 1628
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[178]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[235]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<style>#sk-container-id-12 {color: black;background-color: white;}#sk-container-id-12 pre{padding: 0;}#sk-container-id-12 div.sk-toggleable {background-color: white;}#sk-container-id-12 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-12 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-12 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-12 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-12 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-12 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-12 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-12 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-12 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-12 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-12 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-12 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-12 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-12 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-12 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-12 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-12 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-12 div.sk-item {position: relative;z-index: 1;}#sk-container-id-12 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-12 div.sk-item::before, #sk-container-id-12 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-12 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-12 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-12 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-12 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-12 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-12 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-12 div.sk-label-container {text-align: center;}#sk-container-id-12 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-12 div.sk-text-repr-fallback {display: none;}</style><div class="sk-top-container" id="sk-container-id-12"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[('preprocessor',
+                 ColumnTransformer(transformers=[('num',
+                                                  Pipeline(steps=[('scaler',
+                                                                   StandardScaler())]),
+                                                  ['carat', 'depth', 'table',
+                                                   'x', 'y', 'z']),
+                                                 ('cat',
+                                                  Pipeline(steps=[('onehot',
+                                                                   OneHotEncoder(handle_unknown='ignore',
+                                                                                 sparse_output=False))]),
+                                                  ['cut', 'color',
+                                                   'clarity'])])),
+                ('model', RandomForestRegressor(random_state=42))])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br/>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-78" type="checkbox"/><label class="sk-toggleable__label sk-toggleable__label-arrow" for="sk-estimator-id-78">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[('preprocessor',
+                 ColumnTransformer(transformers=[('num',
+                                                  Pipeline(steps=[('scaler',
+                                                                   StandardScaler())]),
+                                                  ['carat', 'depth', 'table',
+                                                   'x', 'y', 'z']),
+                                                 ('cat',
+                                                  Pipeline(steps=[('onehot',
+                                                                   OneHotEncoder(handle_unknown='ignore',
+                                                                                 sparse_output=False))]),
+                                                  ['cut', 'color',
+                                                   'clarity'])])),
+                ('model', RandomForestRegressor(random_state=42))])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-79" type="checkbox"/><label class="sk-toggleable__label sk-toggleable__label-arrow" for="sk-estimator-id-79">preprocessor: ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(transformers=[('num',
+                                 Pipeline(steps=[('scaler', StandardScaler())]),
+                                 ['carat', 'depth', 'table', 'x', 'y', 'z']),
+                                ('cat',
+                                 Pipeline(steps=[('onehot',
+                                                  OneHotEncoder(handle_unknown='ignore',
+                                                                sparse_output=False))]),
+                                 ['cut', 'color', 'clarity'])])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-80" type="checkbox"/><label class="sk-toggleable__label sk-toggleable__label-arrow" for="sk-estimator-id-80">num</label><div class="sk-toggleable__content"><pre>['carat', 'depth', 'table', 'x', 'y', 'z']</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-81" type="checkbox"/><label class="sk-toggleable__label sk-toggleable__label-arrow" for="sk-estimator-id-81">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-82" type="checkbox"/><label class="sk-toggleable__label sk-toggleable__label-arrow" for="sk-estimator-id-82">cat</label><div class="sk-toggleable__content"><pre>['cut', 'color', 'clarity']</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-83" type="checkbox"/><label class="sk-toggleable__label sk-toggleable__label-arrow" for="sk-estimator-id-83">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown='ignore', sparse_output=False)</pre></div></div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-84" type="checkbox"/><label class="sk-toggleable__label sk-toggleable__label-arrow" for="sk-estimator-id-84">RandomForestRegressor</label><div class="sk-toggleable__content"><pre>RandomForestRegressor(random_state=42)</pre></div></div></div></div></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [236]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">model_performance_regression</span><span class="p">(</span><span class="n">pipe</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="c1"># very good adj r squared as well</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[236]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -9085,12 +9044,12 @@ Indices: [2207, 2314, 4791, 5471, 10167, 11182, 11963, 13601, 14635, 15951, 1628
 <tbody>
 <tr>
 <th>0</th>
-<td>279393.231783</td>
-<td>528.576609</td>
-<td>269.608806</td>
-<td>0.98167</td>
-<td>0.98163</td>
-<td>6.725652</td>
+<td>272385.305301</td>
+<td>521.905456</td>
+<td>263.215054</td>
+<td>0.982129</td>
+<td>0.982114</td>
+<td>6.526709</td>
 </tr>
 </tbody>
 </table>
@@ -9104,10 +9063,10 @@ Indices: [2207, 2314, 4791, 5471, 10167, 11182, 11963, 13601, 14635, 15951, 1628
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [179]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [237]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">yhat2</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">yhat2</span> <span class="o">=</span> <span class="n">pipe</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 <span class="n">yhat2</span>
 </pre></div>
 </div>
@@ -9119,10 +9078,9 @@ Indices: [2207, 2314, 4791, 5471, 10167, 11182, 11963, 13601, 14635, 15951, 1628
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[179]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[237]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>array([ 1670.244,  3704.209,  1873.942, ...,   876.622, 15280.286,
-        1075.844])</pre>
+<pre>array([ 1678.16,  3734.31,  1866.54, ...,   867.7 , 14839.48,  1022.37])</pre>
 </div>
 </div>
 </div>
@@ -9138,12 +9096,12 @@ Indices: [2207, 2314, 4791, 5471, 10167, 11182, 11963, 13601, 14635, 15951, 1628
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [180]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [253]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">X_temp</span> <span class="o">=</span> <span class="n">diamonds_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'price'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -9159,8 +9117,22 @@ Indices: [2207, 2314, 4791, 5471, 10167, 11182, 11963, 13601, 14635, 15951, 1628
 <span class="p">}</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
 <span class="n">X_temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X_temp</span><span class="p">,</span> <span class="n">df</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">X_temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">X_temp</span><span class="p">,</span> <span class="n">drop_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">X_temp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="c1"># X_temp = pd.get_dummies(X_temp, drop_first=True)</span>
+<span class="c1"># X_temp.iloc[-1]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [254]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">X_temp</span>
 </pre></div>
 </div>
 </div>
@@ -9171,32 +9143,174 @@ Indices: [2207, 2314, 4791, 5471, 10167, 11182, 11963, 13601, 14635, 15951, 1628
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[180]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>carat             0.25
-depth             56.7
-table             57.0
-x                 4.01
-y                 4.05
-z                 2.35
-cut_Good         False
-cut_Ideal        False
-cut_Premium       True
-cut_Very Good    False
-color_E          False
-color_F          False
-color_G          False
-color_H          False
-color_I          False
-color_J           True
-clarity_VVS1     False
-clarity_VVS2     False
-clarity_VS1      False
-clarity_VS2      False
-clarity_SI1      False
-clarity_SI2      False
-clarity_I1       False
-Name: 53794, dtype: object</pre>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[254]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>carat</th>
+<th>cut</th>
+<th>color</th>
+<th>clarity</th>
+<th>depth</th>
+<th>table</th>
+<th>x</th>
+<th>y</th>
+<th>z</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>0.23</td>
+<td>Ideal</td>
+<td>E</td>
+<td>SI2</td>
+<td>61.5</td>
+<td>55.0</td>
+<td>3.95</td>
+<td>3.98</td>
+<td>2.43</td>
+</tr>
+<tr>
+<th>1</th>
+<td>0.21</td>
+<td>Premium</td>
+<td>E</td>
+<td>SI1</td>
+<td>59.8</td>
+<td>61.0</td>
+<td>3.89</td>
+<td>3.84</td>
+<td>2.31</td>
+</tr>
+<tr>
+<th>2</th>
+<td>0.23</td>
+<td>Good</td>
+<td>E</td>
+<td>VS1</td>
+<td>56.9</td>
+<td>65.0</td>
+<td>4.05</td>
+<td>4.07</td>
+<td>2.31</td>
+</tr>
+<tr>
+<th>3</th>
+<td>0.29</td>
+<td>Premium</td>
+<td>I</td>
+<td>VS2</td>
+<td>62.4</td>
+<td>58.0</td>
+<td>4.20</td>
+<td>4.23</td>
+<td>2.63</td>
+</tr>
+<tr>
+<th>4</th>
+<td>0.31</td>
+<td>Good</td>
+<td>J</td>
+<td>SI2</td>
+<td>63.3</td>
+<td>58.0</td>
+<td>4.34</td>
+<td>4.35</td>
+<td>2.75</td>
+</tr>
+<tr>
+<th>...</th>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<th>53790</th>
+<td>0.72</td>
+<td>Good</td>
+<td>D</td>
+<td>SI1</td>
+<td>63.1</td>
+<td>55.0</td>
+<td>5.69</td>
+<td>5.75</td>
+<td>3.61</td>
+</tr>
+<tr>
+<th>53791</th>
+<td>0.70</td>
+<td>Very Good</td>
+<td>D</td>
+<td>SI1</td>
+<td>62.8</td>
+<td>60.0</td>
+<td>5.66</td>
+<td>5.68</td>
+<td>3.56</td>
+</tr>
+<tr>
+<th>53792</th>
+<td>0.86</td>
+<td>Premium</td>
+<td>H</td>
+<td>SI2</td>
+<td>61.0</td>
+<td>58.0</td>
+<td>6.15</td>
+<td>6.12</td>
+<td>3.74</td>
+</tr>
+<tr>
+<th>53793</th>
+<td>0.75</td>
+<td>Ideal</td>
+<td>D</td>
+<td>SI2</td>
+<td>62.2</td>
+<td>55.0</td>
+<td>5.83</td>
+<td>5.87</td>
+<td>3.64</td>
+</tr>
+<tr>
+<th>53794</th>
+<td>0.25</td>
+<td>Premium</td>
+<td>J</td>
+<td>NaN</td>
+<td>56.7</td>
+<td>57.0</td>
+<td>4.01</td>
+<td>4.05</td>
+<td>2.35</td>
+</tr>
+</tbody>
+</table>
+<p>53795 rows × 9 columns</p>
+</div>
 </div>
 </div>
 </div>
@@ -9206,7 +9320,7 @@ Name: 53794, dtype: object</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [181]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [239]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">X_temp</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
@@ -9220,11 +9334,10 @@ Name: 53794, dtype: object</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[181]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[239]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>array([[0.25, 56.7, 57.0, 4.01, 4.05, 2.35, False, False, True, False,
-        False, False, False, False, False, True, False, False, False,
-        False, False, False, False]], dtype=object)</pre>
+<pre>array([[0.25, 'Premium', 'J', nan, 56.7, 57.0, 4.01, 4.05, 2.35]],
+      dtype=object)</pre>
 </div>
 </div>
 </div>
@@ -9234,13 +9347,163 @@ Name: 53794, dtype: object</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [182]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [250]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">single_record</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_temp</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-<span class="n">predicted_price</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">single_record</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">X_temp</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[250]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The predicted price with given characterics of a diamond is: $</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">predicted_price</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>carat</th>
+<th>cut</th>
+<th>color</th>
+<th>clarity</th>
+<th>depth</th>
+<th>table</th>
+<th>x</th>
+<th>y</th>
+<th>z</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>53794</th>
+<td>0.25</td>
+<td>Premium</td>
+<td>J</td>
+<td>NaN</td>
+<td>56.7</td>
+<td>57.0</td>
+<td>4.01</td>
+<td>4.05</td>
+<td>2.35</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [263]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># single_record = sc.transform(X_temp.values[-1].reshape(1, -1))</span>
+<span class="n">X_temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">X_temp</span><span class="p">)</span>
+<span class="c1"># predicted_price = pipe.predict(X_temp)</span>
+
+<span class="c1"># print(f"The predicted price with given characterics of a diamond is: ${np.round(predicted_price.item(), 2)}")</span>
+<span class="n">X_temp</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[263]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>carat</th>
+<th>depth</th>
+<th>table</th>
+<th>x</th>
+<th>y</th>
+<th>z</th>
+<th>clarity_VVS1</th>
+<th>clarity_VVS2</th>
+<th>clarity_VS1</th>
+<th>clarity_VS2</th>
+<th>clarity_SI1</th>
+<th>clarity_SI2</th>
+<th>clarity_I1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>53794</th>
+<td>0.25</td>
+<td>56.7</td>
+<td>57.0</td>
+<td>4.01</td>
+<td>4.05</td>
+<td>2.35</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="o">!</span>jupyter<span class="w"> </span>nbconvert<span class="w"> </span>--to<span class="w"> </span>html<span class="w"> </span>Midterm_RJ.ipynb
 </pre></div>
 </div>
 </div>
@@ -9252,39 +9515,25 @@ Name: 53794, dtype: object</pre>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>The predicted price with given characterics of a diamond is: $543.31
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>[NbConvertApp] Converting notebook Midterm_RJ.ipynb to html
+[NbConvertApp] WARNING | Alternative text is missing on 10 image(s).
+[NbConvertApp] Writing 659008 bytes to Midterm_RJ.html
 </pre>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [183]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">single_record</span>
+<div class="highlight hl-ipython3"><pre><span></span> 
 </pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[183]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>array([[-1.15354761, -3.53921457, -0.20555   , -1.53117724, -1.46340614,
-        -1.70620175, -0.58898744, -0.53774326,  3.16863962, -0.17423804,
-        -0.47160533, -0.45985718, -0.51708358, -0.42625798, -0.33455838,
-         4.26956936, -0.26910306, -0.32086209, -0.42206317, -0.54359318,
-        -0.5673413 , -0.45171414, -0.11880814]])</pre>
 </div>
 </div>
 </div>
